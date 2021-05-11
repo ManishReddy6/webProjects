@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>computer</title>
+</head>
+<style>
+.shadow
+  {
+    margin: 10px 5%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.5);
+    background: rgba(100,150,120,0.1);
+    border-radius: 4px;
+  }
+table 
+{
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th 
+{
+  border: 2px solid rgba(0,0,255,0.6);;
+  text-align: center;
+  padding: 8px;
+}
+
+tr:nth-child(even) 
+{
+  background-color: rgba(100,150,120,0.2);
+}
+
+button a
+{
+  text-decoration: none;
+  color: white;
+}
+button
+{
+  width: 80px;
+  background: green;
+  height: 30px;
+  color: white;
+}
+</style>
+<body>
+  <div><%- include('../public/nav.ejs') %></div>
+  <div class="shadow">
+    <h3>User Details</h3>
+		<table>
+		  <tbody>
+		    <% if(items.length>0){ %>
+            <% items.forEach(item=>{ %>
+            <tr>
+            	<td>User ID</td>
+            	<td><%= item.EntryID %></td>
+            </tr>
+            <tr>
+              <td>Username</td>
+              <td><%= item.Username %></td>
+            </tr>
+            <tr>
+              <td>User Address</td>
+              <td><%= item.User_Address %></td>
+            </tr>
+            <tr>
+              <td>Mobile Number</td>
+              <td><%= item.Mobile_Number %></td>
+            </tr>
+            <tr>
+              <td>Email ID</td>
+              <td><%= item.Email %></td>
+            </tr>
+            <tr>
+              <td>ID Proof</td>
+              <td><%= item.ID_proof %></td>
+            </tr>
+            <tr>
+              <td>Computer ID</td>
+              <td><%= item.computerID %></td>
+            </tr>
+            <tr>
+              <td>Computer Name</td>
+              <td><%= item.computer_name %></td>
+            </tr>
+            <tr>
+              <td>login time</td>
+              <td><%= item.startTime %></td>
+            </tr>
+            <tr>
+              <td>logout time</td>
+              <td><%= item.endTime %></td>
+            </tr>
+            <tr>
+              <td>Amount</td>
+              <td><%= item.amount %></td>
+            </tr>
+            <tr>
+              <td>User Status</td>
+              <td><%= item.user_status %></td>
+            </tr>
+            <% }); %>
+            <% } %>
+        </tbody>
+		</table>
+	</div>
+</body>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Users</title>
+</head>
+<style type="text/css">
+
+  .shadow
+  {
+    margin: 20px 10%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.5);
+    background: rgba(100,150,120,0.3);
+    border-radius: 4px;
+  }
+	.total
+	{
+		height: 80%;
+		width: 100%;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-around;
+	}
+    .add
+    {
+    	padding: 5px;
+    	width: 100%;
+    }
+
+	.left-side-bar
+	{
+		width: 47%;
+		float: left;
+		display: flex;
+		justify-content: space-around;
+		flex-direction: column; 
+	}
+
+    .right-side-bar
+	{
+		width: 47%;
+		margin-right: 20px; 
+		display: flex;
+		flex-direction: column;	
+		float: right; 
+	}
+
+	.form
+	{
+		margin-top: 20px; 
+	} 
+
+    .left-side-bar label
+    {
+    	margin-left: 15px;
+    }    
+
+    .right-side-bar label
+    {
+    	margin-left: 5px;
+    }
+
+    .left-side-bar input
+    {
+    	width: 100%;
+    	height: 50px;
+    	margin-left: 15px;
+    	margin-right: 5px;
+    	margin-bottom: 20px;
+    	border-color: rgba(0,0,255,0.8);
+		border-radius: 4px;
+    }    
+
+    .right-side-bar input
+    {
+    	right: 50px;
+    	width: 100%;
+    	height: 50px;
+    	margin-left: 5px;
+    	margin-right: 5px;
+    	margin-bottom: 20px;
+    	border-color: rgba(0,0,255,0.8);
+		border-radius: 4px;
+    }
+
+    .submit
+	{
+		display: flex;
+		align-items: center;
+		justify-content: center; 
+	}
+
+	.submit button
+	{
+		width: 80px;
+		height: 40px;
+		padding: 10px 5px;
+		background: green;
+		margin-bottom: 30px;
+		border: none;
+		border-radius: 4px;
+		cursor: pointer; 
+	}
+
+</style>
+</head>
+<body>
+	<%- include('../public/nav.ejs') %>
+	<div class="shadow">
+	<% if(items.length>0){ %>
+	<% items.forEach(item=>{ %>
+	<form action="/addUser/<%= item.computerID %>" method="post">
+		<div class="total">
+		<div class="add">
+		<div class="left-side-bar">
+			<div class="form">
+				<label>Username</label>
+				<input type="text" name="Username" class="form-control" placeholder="Username">
+		    </div>
+		    <div class="form">
+		    	<label>User Address</label>
+		    	<input type="text" name="UserAddress" placeholder="User Address">
+		    </div>
+			<div class="form">
+				<label>Mobile Number</label>
+				<input type="text" name="Mobile" class="form-control" placeholder="Mobile Number">
+		    </div>
+		    <div class="form">
+				<label>Computer Name</label>
+				<input type="text" name="computerName" class="form-control" placeholder="Computer Name" value="<%= item.computerName %>">
+		    </div>
+		</div>
+		<div class="right-side-bar">
+			<div class="form">
+				<label>Email</label>
+				<input type="text" name="Email" class="form-control" placeholder="Email" required>
+		    </div>
+		    <div class="form">
+		    	<label>Computer ID</label>
+		    	<input type="text" name="computerID" value="<%= item.computerID %>" placeholder="Computer ID" required>
+		    </div>
+		    <div class="form">
+				<label>ID Proof</label>
+				<input type="text" name="IDproof" class="form-control" placeholder="ID proof" required>
+		    </div>
+			<div class="form">
+				<label>ID Proof No</label>
+				<input type="text" name="IDproofNo" class="form-control" placeholder="IDproof No" required>
+		    </div>
+		</div>
+	    </div>
+	    <div class="submit">
+			<button type="submit">Submit</button>
+		</div>
+	    </div>
+	</form>
+	<% }) %>
+	<% } %>
+    </div>
+</body>
+</html>

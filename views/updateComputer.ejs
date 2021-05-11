@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="computer.css">
+</head>
+<style>
+	.shadow
+	{
+		margin: 2px 20%;
+		box-shadow: 0 4px 8px 0 rgba(0,0,0,0.5);
+	}
+
+	.update
+	{
+		margin: 40px 0px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+	.form-content input
+	{
+		border-color: rgb(0,255,0);
+		width: 600px;
+		height: 50px;
+		margin: 20px;
+		margin-top: 0px; 
+		padding: 5px;
+	}
+
+	.form-content label
+	{
+		margin-left: 20px;
+		margin-top: 30px;  
+	}
+
+	.update .add-content
+	{
+		display: flex;
+		justify-content: center;
+	}
+
+	.add-btn
+	{
+		height: 40px;
+		width: 80px;
+		margin: 10px;
+		background: green;
+	}
+</style>
+<body>
+	<%- include('../public/nav.ejs') %>
+	<% if(items.length>0){ %>
+	<% items.forEach(item=>{ %>
+	<div class="shadow">
+	<div class="update">
+		<form action="/updateComputer/<%= item.computerID %>" method="post">
+			<div class="form-content">
+			<label>Computer No.</label>
+		    </div>
+			<div class="form-content">
+					<input type="text" name="ComputerID" value="<%=item.computerID %>" required>
+			</div>
+			<div class="form-content">
+			<label>Computer Name</label>
+		    </div>
+			<div class="form-content">
+					<input type="text" name="ComputerName" value="<%=item.computerName %>" required>
+			</div>
+			<div class="form-content">
+			<label>Computer IP Address</label>
+		    </div>
+			<div class="form-content">
+					<input type="text" name="ComputerIP" value="<%=item.computerIP %>">
+			</div>
+			<div class="add-content">
+				<button id="add" class="add-btn">add</button>
+			</form>
+				<button id="cancel1" class="add-btn"> cancel</button>
+		    </div>
+    <% }) %>
+	<% } %>
+     </div>
+ </div>
+     <script type="text/javascript" src="add-computer.js"></script>
+</body>
+</html>

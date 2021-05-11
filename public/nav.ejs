@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CyberCafe Management System</title>
+</head>
+<style>
+*{
+  padding: 0;
+  margin: 0;
+}
+
+body
+{
+    background: rgba(120,150,180,0.4);
+}
+
+h1
+{
+  padding: 15px;
+}
+.nav
+{
+  margin: 0 auto;
+}
+
+nav
+{
+  background: #0082e6;
+  height: 50px;
+  width: 100%;
+   margin: 0 auto;
+}
+
+nav ul {
+  float: right;
+  margin:0;
+  padding: 0;
+  margin-right: 30px; 
+  list-style-type: none;
+}
+
+nav ul li {
+  position: relative;
+  display: inline-block;
+  margin: 0 5px;
+  line-height: 30px;
+}
+
+nav ul li a
+{
+  display: block;
+  text-decoration: none;
+  color: white;
+  text-transform: uppercase;
+  padding: 10px 80px;
+  line-height: 30px;
+  border-radius: 3px;
+}
+
+nav ul ul
+{
+  background: #0082e6;
+  position: absolute;
+  top: 50px;
+  display: none;
+}
+
+nav ul li:hover > ul
+{
+  display: block;
+}
+
+
+nav ul ul li
+{
+  position: relative;
+  float: none;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+nav ul ul li a
+{
+  display: inline-block;
+  text-decoration: none;
+  color: white;
+  text-transform: uppercase;
+  border-radius: 3px;
+}
+
+nav ul li a:hover 
+{
+  background: #1b9bff;
+}
+
+</style>
+<body>
+  <h1><center>CyberCafe Management System</center></h1>
+  <div class ="nav">
+    <nav>
+    <ul>
+    <li><a href="/home">Home</a></li>  
+    <li><a href="#">Computer</a>
+        <ul>  
+          <li><a href="/manageComputer">ManageComputers</a></li>
+        </ul>
+    </li>
+    <li><a href="#">Users</a>
+        <ul>  
+          <li id="back"><a href="/activeUser">Activeusers</a></li>
+          <li id="back"><a href="/oldUser">Old users</a></li>
+        </ul>
+    </li>
+    <li><a href="/reports">Reports</a></li>
+    <li><a href="/login">Logout</a></li>
+    </ul>
+    </nav>
+  </div>
+  <script type="text/javascript" src="add-computer.js"></script>
+</body>
+</html>

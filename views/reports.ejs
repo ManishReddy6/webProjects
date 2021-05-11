@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Reports</title>
+</head>
+<style>
+	.search
+	{
+		margin: 20px;
+		margin-right: 60px;
+		padding: 20px;
+		float: right;
+    display: flex;
+    flex-direction: row;
+	}
+	input
+	{
+		width: 180px;
+		height: 30px;
+		padding: 5px;
+	}
+	button
+	{
+        height: 40px;
+        width: 80px;
+        cursor: pointer;
+        border-radius: 4px;
+        border:none;
+        background: green;
+		padding: 5px 8px;
+	}
+	.shadow
+  {
+    margin: 10px 5%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.5);
+    background: rgba(100,150,120,0.1);
+    border-radius: 4px;
+  }
+table 
+{
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th 
+{
+  border: 2px solid rgba(0,0,255,0.6);;
+  text-align: center;
+  padding: 8px;
+}
+
+tr:nth-child(even) 
+{
+  background-color: rgba(100,150,120,0.2);
+}
+
+button a
+{
+  text-decoration: none;
+  color: white;
+}
+button
+{
+  width: 80px;
+  background: green;
+  height: 30px;
+  color: white;
+}
+
+
+
+</style>
+<body>
+	<%- include('../public/nav.ejs') %>
+	<div class="search">
+	<form action="/reports" method="post">
+		<input type="date" name="search">
+    <h3>TO</h3>
+    <input type="date" name="searchDate">
+		<button>
+			search
+		</button>
+	</form>
+    </div>
+    <div class="shadow">
+		<table>
+			<thead>
+			<tr>
+			<th>User ID</th>
+			<th>Username</th>
+			<th>Computer ID</th>
+			<th>Computer Name</th>
+			<th>Action</th>
+		  </tr>
+		  </thead>
+		  <tbody>
+		    <% if(items.length>0){ %>
+            <% items.forEach(item=>{ %>
+            <tr>
+            	<td><%= item.EntryID %></td>
+            	<td><%= item.Username %></td>
+            	<td><%= item.computerID %></td>
+            	<td><%= item.computer_name %></td>
+            	<td>
+            		<button><a href="/viewUser/<%= item.computerID%>"> view</a></button>
+            		<button><a href="/manageUser/<%= item.EntryID%>">delete</a></button>
+            	</td>
+            </tr>
+            <% }) %>
+            <% }else{ %>
+            <tr>
+            	<td colspan="5">no users found</td>
+            </tr>
+            <% } %>
+            </tbody>
+		</table>
+	</div>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Users</title>
+</head>
+<style>
+.shadow
+  {
+    margin: 10px 5%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.5);
+    background: rgba(100,150,120,0.1);
+    border-radius: 4px;
+  }
+table 
+{
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th 
+{
+  border: 2px solid rgba(0,0,255,0.6);;
+  text-align: center;
+  padding: 8px;
+}
+
+tr:nth-child(even) 
+{
+  background-color: rgba(100,150,120,0.2);
+}
+
+button a
+{
+  text-decoration: none;
+  color: white;
+}
+button
+{
+  width: 80px;
+  background: green;
+  height: 30px;
+  color: white;
+}
+</style>
+<body>
+	<%- include('../public/nav.ejs') %>
+	<div class="shadow">
+		<table>
+			<thead>
+				<tr>
+				<th>Entry ID</th>
+				<th>Computer ID</th>
+				<th>Username</th>
+				<th>Action</th>
+			    </tr>
+			</thead>
+			<tbody>
+				<% if(items.length>0){ %>
+				<% items.forEach(item=>{ %>
+				<tr>
+					<td><%= item.EntryID %></td>
+					<td><%= item.computerID %></td>
+					<td><%= item.Username %></td>
+					<td><button><a href="/updateUser/<%= item.computerID%>"> update</a></button></td>
+				</tr>
+				<% }); %>
+				<% }else{ %>
+                <tr>
+            	<td colspan="7">no active users</td>
+                </tr>
+                <% } %>
+			</tbody>
+		</table>
+	</div> 
+</body>
+</html>

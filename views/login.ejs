@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Login</title>
+	<style type="text/css">
+		body
+		{
+			background: rgba(0,0,255,0.7);
+		}
+		.log
+		{
+			background: rgba(255,255,255,0.7);
+			padding: 50px 50px;  
+			box-shadow: 0 4px 8px 0 rgba(0,0,0,0.5);
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			border-radius: 4px;
+		}
+
+		#user
+		{
+			padding: 15px 35px;
+			margin: 5px 20px;
+			border-color: rgba(0,0,255,0.8);
+			border-radius: 4px; 
+		}
+
+		#pass
+		{
+		   padding: 15px 35px;
+		   margin: 5px 20px;
+		   border-color: rgba(0,0,255,0.8);
+			border-radius: 4px; 
+		}
+
+		.total
+		{
+			margin-top: 160px; 
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+		}
+
+		.login
+		{
+		    text-align: center;
+		    margin: 10px;	
+		}
+
+		.login button
+		{
+			padding: 12px 25px;
+			background: rgba(0,0,255,0.8);
+			border-radius: 4px;
+			border: none;
+			cursor: pointer;
+
+		}
+
+		a
+		{
+			text-decoration: none;
+			float: right;
+			margin-left: 130px; 
+		}
+	</style>
+</head>
+<body>
+	<div class="total">
+	<h2>Cybercafe Management</h2>
+	<form action="/login" method="post">
+	<div class="log"> 
+		    <div>
+			    <input type="text" id="user" name="username" placeholder="Enter Your Username">
+	        </div>
+	        <div>
+	        	<input type="password" id="pass" name="pass" placeholder="Enter Your Password">
+	        </div>
+	        <div>
+	        	<a href="/forgotPassword">forgot Password?</a>
+	        </div>
+	        <div class="login">
+	        	<button>Login</button>
+	        </div>
+	        <%=message%>
+        </div>
+    </form>
+    </div>
+</body>
+</html>

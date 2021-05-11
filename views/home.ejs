@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="computer.css">
+</head>
+<body>
+	<%- include('../public/nav.ejs') %>
+	<div class="add-computer">
+		<div>
+			<button id="addbtn" class="btn">Add Computer</button>
+		</div>
+		<div id="modal" class="modal">
+			<div class="modal-content">
+				<form action="/home" method="post">
+					<div class="form-content">
+						<label>Computer No.</label>
+						<input type="text" name="ComputerID" required>
+					</div>
+					<div class="form-content">
+						<label>Computer Name</label>
+						<input type="text" name="ComputerName" required>
+					</div>
+					<div class="form-content">
+						<label>Computer IP Address</label>
+						<input type="text" name="ComputerIP">
+					</div>
+					<div class="add-content">
+						<button id="add" class="add-btn">add</button>
+				</form>
+				<button id="cancel" class="add-btn">cancel</button>
+			    </div>
+			</div>
+		</div>
+	</div>
+	<div class="border">
+		<div class="computer-space">
+		<% if(items.length>0){ %>
+		<% items.forEach(item=>{ %>
+		<div class="computer">
+			<ul class="computer-screen">
+				<p>C<%= item.computerID %></p>
+				<p><%= item.computerName %></p>
+		    <ul>  
+			    <li><a href="/addUser/<%= item.computerID %>">add user</a></li>
+			    <li><a href="/updateUser/<%= item.computerID %>">update users</a></li>
+		    </ul>
+		    </ul>
+	    <div class="computer-handle">
+	    </div>
+	    <div class="computer-stand">
+	    </div>
+	    </div>
+	    <% }) %>
+	    <% }else{ %>
+	    <div class="no-computers">
+	    <h2>no computers found</h2>
+	    </div>
+	    <% } %>
+	</div>
+	<script type="text/javascript" src="add-computer.js"></script>
+</body>
+</html>
