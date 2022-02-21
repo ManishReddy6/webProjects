@@ -1,6 +1,9 @@
 const express=require('express');
 const app=express();
 const con=require('./sqlConnection.js');
+const session=require('express-session');
+const cookieParser=require('cookie-parser');
+const flash  = require('connect-flash');
 
 const home=(req,res)=>{
   con.query('select * from computer',(err,rows,fields)=>{
@@ -10,7 +13,7 @@ const home=(req,res)=>{
     }      
     else
     {
-      res.render('home',{title:'Computer Details',items:rows});
+        res.render('home',{title:'Computer Details',items:rows});
     }
   });
  } 
@@ -30,24 +33,40 @@ const manageComputer=(req,res)=>{
 
 const addComputer=(req,res)=>{
   let table=req.body;
-  console.log(req.body)
-  con.query('insert into computer(computerID,computerName,computerIP) values(? ,? ,?)',[table.ComputerID,table.ComputerName,table.ComputerIP],(err,results,fields)=>{
+  let checkComputerName=/^[a-zA-Z]+$/.test(req.body.ComputerName);
+  let checkComputerId=/^[0-9]+$/.test(req.body.ComputerID);
+  if(checkComputerName && checkComputerId)
+  {
+  con.query('insert into computer(computerID,computerName,computerIP,computer_status) values(? ,? ,? ,?)',[table.ComputerID,table.ComputerName,table.ComputerIP,"inactive"],(err,results,fields)=>{
     if(err)
     {
       console.log(err);
     }      
     else
     {
-      console.log("Inserted Successfully");
-      res.redirect("/home");
+      console.log('Inserted Successfully');
+      res.redirect('/home');
     }
   });
+  }
+  else if(!checkComputerId)
+  {
+    console.log("Only Numbers are Accepted");
+    res.redirect('/home');
+  }
+  else
+  {
+    console.log("Only Alphabets are Accepted");
+    res.redirect('/home');
+  }
 }
-
 
 const addUser=(req,res)=>{
   let tableUser=req.body;
-  con.query('insert into users(Username,User_Address,Mobile_Number,Email,ID_proof,IdProof,computerID,user_status,computer_status,computer_name) values(? ,? ,? ,? ,? ,? ,? ,? ,?,?)',[tableUser.Username,tableUser.UserAddress,tableUser.Mobile,tableUser.Email,tableUser.IDproofNo,tableUser.IDproof,tableUser.computerID,"active","active",tableUser.computerName],(err,results,fields)=>{
+  con.query('select * from users where Email=?',[req.body.Email],(err,results,fields)=>{
+  if(results.length==0)
+  {
+  con.query('insert into users(Username,User_Address,Mobile_Number,Email,ID_proof,IdProof,computerID,user_status) values(? ,? ,? ,? ,? ,? ,?,?);update computer set computer_status="active" where computerID=?',[tableUser.Username,tableUser.UserAddress,tableUser.Mobile,tableUser.Email,tableUser.IDproofNo,tableUser.IDproof,tableUser.computerID,"active",tableUser.computerID],(err,results,fields)=>{
     if(err)
     {
       console.log(err);
@@ -58,10 +77,25 @@ const addUser=(req,res)=>{
       res.redirect("/home"); 
     }
   });
+  }
+  else
+  {
+  con.query('update users set Username=?,User_Address=?,Mobile_Number=?,Email=?,ID_proof=?,IdProof=?,computerID=?,user_status=? where Email=?;update computer set computer_status="active" where computerID=?',[tableUser.Username,tableUser.UserAddress,tableUser.Mobile,tableUser.Email,tableUser.IDproofNo,tableUser.IDproof,tableUser.computerID,"active",tableUser.Email,tableUser.computerID],(err,results,fields)=>{
+    if(err)
+    {
+      console.log(err);
+    }      
+    else
+    {
+      console.log("Inserted Successfully");
+      res.redirect("/home"); 
+    }
+  }); 
+  }
+});
 }
 
 const activeUser=(req,res)=>{
-
   con.query('select *,date_format(start_time, "%Y-%m-%d %H:%i:%s") as "time" from users where user_status="active"',(err,rows,fields)=>{
     if(err)
     {
@@ -75,7 +109,7 @@ const activeUser=(req,res)=>{
 }
 
 const oldUser=(req,res)=>{
-  con.query('select * from users where user_status="inactive"',(err,rows,fields)=>{
+  con.query('select * from users,computer where users.computerID=computer.computerID and users.user_status="inactive"',(err,rows,fields)=>{
     if(err)
     {
       console.log(err);
@@ -106,7 +140,7 @@ const updateComputer=(req,res)=>{
 const updateUser=(req,res)=>{
   const tableUser=req.body;
 
-  con.query('update users set user_status=?,computer_status=? where computerID=? and computer_status=?',["inactive","inactive",req.params.computerID,"active"],(err,results,fields)=>{
+  con.query('update users set user_status=? where computerID=?;update computer set computer_status=? where computerID=?',["inactive",req.params.computerID,"inactive",req.params.computerID],(err,results,fields)=>{
     if(err)
     {
       console.log(err);
@@ -161,7 +195,7 @@ const searchResults2=(req,res)=>{
 
 const searchResultsget=(req,res)=>{
   const tablesearch=req.body;
-  con.query('select * from users',(err,rows,fields)=>{
+  con.query('select * from users,computer where users.computerID=computer.computerID and users.user_status="inactive"',(err,rows,fields)=>{
     if(err)
     {
       console.log(err);
@@ -241,5 +275,5 @@ const deleteUser=(req,res)=>{
   activeUser,
   oldUser,
   updateUser,
-  deletecomputer
+  deletecomputer,
  };

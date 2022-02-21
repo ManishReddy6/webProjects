@@ -36,19 +36,21 @@
 		<div class="computer-space">
 		<% if(items.length>0){ %>
 		<% items.forEach(item=>{ %>
+		<% if(item.computer_status=="inactive"){%>
+		<a href="/addUser/<%= item.computerID %>">
+			<%}else{%>
+		<a href="/updateUser/<%= item.computerID %>">
+		<%}%>	
 		<div class="computer">
 			<ul class="computer-screen">
-				<p>C<%= item.computerID %></p>
+				<p color="black">C<%= item.computerID %></p>
 				<p><%= item.computerName %></p>
-		    <ul>  
-			    <li><a href="/addUser/<%= item.computerID %>">add user</a></li>
-			    <li><a href="/updateUser/<%= item.computerID %>">update users</a></li>
-		    </ul>
 		    </ul>
 	    <div class="computer-handle">
 	    </div>
 	    <div class="computer-stand">
 	    </div>
+	    </a>
 	    </div>
 	    <% }) %>
 	    <% }else{ %>

@@ -60,6 +60,14 @@ button
               <td><%= item.Username %></td>
             </tr>
             <tr>
+              <td>Computer ID</td>
+              <td><%= item.computerID %></td>
+            </tr>
+            <tr>
+              <td>Computer Name</td>
+              <td><%= item.computerName %></td>
+            </tr>
+            <tr>
               <td>User Address</td>
               <td><%= item.User_Address %></td>
             </tr>
@@ -76,14 +84,6 @@ button
               <td><%= item.ID_proof %></td>
             </tr>
             <tr>
-              <td>Computer ID</td>
-              <td><%= item.computerID %></td>
-            </tr>
-            <tr>
-              <td>Computer Name</td>
-              <td><%= item.computer_name %></td>
-            </tr>
-            <tr>
               <td>login time</td>
               <td><%= item.startTime %></td>
             </tr>
@@ -98,10 +98,6 @@ button
             <tr>
               <td>Amount</td>
               <td><%= item.amount %></td>
-            </tr>
-            <tr>
-              <td>User Status</td>
-              <td><%= item.user_status %></td>
             </tr>
             <% }); %>
             <% } %>

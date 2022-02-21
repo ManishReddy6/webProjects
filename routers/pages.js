@@ -55,7 +55,7 @@ const update=(req,res)=>{
 };
 
 const updateUser=(req,res)=>{
-  con.query('select *,date_format(start_time, "%Y-%m-%d %H:%i:%s") as "time" from users where computerID=? and computer_status=?',[req.params.computerID,"active"],(err,rows,fields)=>{
+  con.query('select *,date_format(start_time, "%Y-%m-%d %H:%i:%s") as "time" from users where computerID=?',[req.params.computerID],(err,rows,fields)=>{
     if(err)
     {
       console.log(err);
@@ -81,7 +81,7 @@ const deletecomputer=(req,res)=>{
 };
 
 const viewuser=(req,res)=>{
-  con.query('select *,date_format(start_time, "%Y-%m-%d %H:%i:%s") as "startTime",date_format(logout_time, "%Y-%m-%d %H:%i:%s") as "endTime",TIMESTAMPDIFF(second,start_time, logout_time) as "TotTime",TIMESTAMPDIFF(second,start_time, logout_time)*0.02 as "amount" from users where computerID=? and computer_status=?',[req.params.computerID,"inactive"],(err,rows,fields)=>{
+  con.query('select *,date_format(start_time, "%Y-%m-%d %H:%i:%s") as "startTime",date_format(logout_time, "%Y-%m-%d %H:%i:%s") as "endTime",TIMESTAMPDIFF(second,start_time, logout_time) as "TotTime",TIMESTAMPDIFF(second,start_time, logout_time)*0.02 as "amount" from users,computer where users.EntryID=? and computer.computerID=users.computerID;',[req.params.EntryID],(err,rows,fields)=>{
     if(err)
     {
       console.log(err);

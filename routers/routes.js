@@ -12,7 +12,7 @@ router.get('/addUser/:computerID',routes.add);
 router.get('/updateComputer/:computerID',routes.update);
 router.get('/updateUser/:computerID',routes.updateUser);
 router.get('/manageComputer/:computerID',routes.deletecomputer);
-router.get('/viewUser/:computerID',routes.viewuser);
+router.get('/viewUser/:EntryID',routes.viewuser);
 router.get('/manageUser/:EntryID',routes.deletecomputer);
 
 module.exports=router;

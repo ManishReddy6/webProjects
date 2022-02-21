@@ -2,7 +2,6 @@ const express = require('express');
 const app=express();
 const con=require('./routers/sqlConnection.js');
 const controller=require('./routers/controller.js');
-const jwt = require('jsonwebtoken');
 
 require('dotenv').config();
 
@@ -70,7 +69,7 @@ app.post('/addUser/:computerID',controller.addUser);
 
 app.post('/updateUser/:computerID',controller.updateUser);
 
-app.post('/manageComputer/:computerID',controller.deletecomputer);
+app.get('/manageComputer/:computerID',controller.deletecomputer);
 
 app.get('/manageUser/:EntryID',controller.deleteUser);
 

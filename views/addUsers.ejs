@@ -151,6 +151,11 @@
 	    <div class="submit">
 			<button type="submit">Submit</button>
 		</div>
+		<% if(message.length>0){ %>
+		<div>
+			<%= message %>
+		</div>
+		<%}%>
 	    </div>
 	</form>
 	<% }) %>
