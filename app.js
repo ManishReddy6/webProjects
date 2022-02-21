@@ -11,7 +11,7 @@ app.use(express.urlencoded({extended:false}));
 
 app.use(express.static(__dirname+'/public'));
 
-app.get('/login',function(req,res) {
+app.get('/',function(req,res) {
   res.render('login',{message:""});
 });
 
@@ -40,7 +40,7 @@ app.post('/forgotPassword',function(req,res) {
   }
 });
 
-app.post('/login', (req,res)=>{
+app.post('/', (req,res)=>{
   const username=req.body.username;
 
   const pass=req.body.pass;
